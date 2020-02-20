@@ -1,1 +1,1 @@
-export const eslApiEndpoint = "https://api.elderscrollslegends.io/"
+export const eslApiEndpoint = "https://api.elderscrollslegends.io"
