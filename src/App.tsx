@@ -3,13 +3,13 @@ import "./App.scss"
 import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux"
 import { store } from "./store/store"
-import { Home } from "./pages/home/Home"
+import { Shell } from "./pages/shell/Shell"
 
 const App = () => {
     return (
         <BrowserRouter>
             <Provider store={store}>
-                <Home />
+                <Shell />
             </Provider>
         </BrowserRouter>
     )
