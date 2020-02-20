@@ -6,6 +6,7 @@ import { RootState } from "../../store/store"
 import { RouteComponentProps } from "react-router-dom"
 import { CardInfo } from "../../utils/FetchClient"
 import { Card } from "./components/Card"
+import { getClassName } from "../../utils/utils"
 
 interface CardGridProps extends RouteComponentProps {
     className?: string
@@ -23,13 +24,15 @@ export const CardGrid: React.FC<CardGridProps> = ({ className }): JSX.Element =>
     }, [])
 
     const renderCardList = (cardList: CardInfo[] | undefined): JSX.Element => {
-        return <div className="card-list"> {(cardList || []).map(renderCard)}</div>
+        return <div className={`${styles.cardList} card-list`}> {(cardList || []).map(renderCard)}</div>
     }
 
     const renderCard = (card: CardInfo): JSX.Element => <Card card={card} />
 
     return (
         // TODO: get classname util function
-        <div className={`CardGrid ${styles.CardGrid} ${className ?? ""}`}>{renderCardList(cardListInfo?.cards)}</div>
+        <div className={getClassName("CardGrid", styles.CardGrid, className)}>
+            {renderCardList(cardListInfo?.cards)}
+        </div>
     )
 }
