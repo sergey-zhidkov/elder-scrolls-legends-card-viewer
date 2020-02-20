@@ -11,13 +11,13 @@ import { eslApiEndpoint } from "../appSettings"
 // })
 
 export interface CardListInfoResponse {
-    cards: Card[]
+    cards: CardInfo[]
     _links: { next: string }
     _pageSize: number
     _totalCount: number
 }
 
-export interface Card {
+export interface CardInfo {
     id: string
     attributes: string[]
     collectible: boolean

@@ -18,5 +18,5 @@ export function Shell({ className }: ShellProps): JSX.Element {
         )
     }
 
-    return <div className={`Shell ${styles.Shell} ${className ?? ""}`}>Shell{renderRouters()}</div>
+    return <div className={`Shell ${styles.Shell} ${className ?? ""}`}>{renderRouters()}</div>
 }
