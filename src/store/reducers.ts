@@ -8,10 +8,10 @@ export enum FetchState {
 }
 
 export interface CardState {
-    cardListInfo: {
-        cards: any[]
+    cardListInfo: Readonly<{
+        cards: string[]
         fetchState: FetchState
-    }
+    }>
 }
 
 function cardListInfo(

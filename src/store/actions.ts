@@ -1,6 +1,8 @@
-import { Dispatch } from "redux"
+import { Action, AnyAction } from "redux"
+import { ThunkAction, ThunkDispatch } from "redux-thunk"
+import { CardState } from "./reducers"
 
-interface Action<T> {
+interface PayloadAction<T> extends Action {
     type: string
     payload: T
 }
@@ -10,19 +12,24 @@ export const actionTypes = {
     updateGetCardsFetchState: "esl_updateGetCardsFetchState",
 }
 
-export interface GetCards extends Action<any[]> {}
+export interface GetCards extends PayloadAction<string[]> {}
+
+// export type AppDispatch = typeof store.dispatch
+export type ThunkPromiseAction = ThunkAction<Promise<void>, CardState, undefined, Action>
+export type ThunkVoidAction = ThunkAction<void, CardState, undefined, Action>
+export type ThunkDispatchApp = ThunkDispatch<{}, {}, AnyAction>
 
 export const actions = {
-    getCards() {
-        return async (dispatch: Dispatch): Promise<void> => {
+    getCards(): ThunkPromiseAction {
+        return async (dispatch: ThunkDispatchApp): Promise<void> => {
             dispatch<GetCards>({
                 type: actionTypes.getCards,
                 payload: [],
             })
         }
     },
-    updateGetCardsFetchState() {
-        return (dispatch: Dispatch): void => {
+    updateGetCardsFetchState(): ThunkVoidAction {
+        return (dispatch: ThunkDispatchApp): void => {
             dispatch({
                 type: actionTypes.updateGetCardsFetchState,
             })
