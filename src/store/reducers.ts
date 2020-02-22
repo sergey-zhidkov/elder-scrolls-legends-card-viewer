@@ -10,26 +10,26 @@ export enum FetchState {
 
 export interface CardState {
     cardListInfo: Readonly<{
-        cardListInfo: CardListInfoResponse | null
+        cardListInfoResponse: CardListInfoResponse | null
         fetchState: FetchState
     }>
 }
 
 function cardListInfo(
     state: CardState["cardListInfo"] = {
-        cardListInfo: null,
+        cardListInfoResponse: null,
         fetchState: FetchState.Success,
     },
     action: GetCards
 ): CardState["cardListInfo"] {
     if (action.type === actionTypes.getCards) {
         return {
-            cardListInfo: action.payload,
+            cardListInfoResponse: action.payload,
             fetchState: FetchState.Success,
         }
     } else if (action.type === actionTypes.updateGetCardsFetchState) {
         return {
-            cardListInfo: state.cardListInfo,
+            cardListInfoResponse: state.cardListInfoResponse,
             fetchState: FetchState.Loading,
         }
     }
