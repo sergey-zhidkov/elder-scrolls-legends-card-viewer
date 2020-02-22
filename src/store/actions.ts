@@ -22,11 +22,9 @@ export type ThunkDispatchApp = ThunkDispatch<{}, {}, AnyAction>
 
 export const actions = {
     getCards(): ThunkPromiseAction {
-        return async (dispatch: Dispatch): Promise<void> => {
+        return async (dispatch: Dispatch<any>): Promise<void> => {
             try {
-                // dispatch(actions.updateGetCardsFetchState())
-                // const issue = await getIssue(org, repo, number)
-                // dispatch(getIssueSuccess(issue))
+                dispatch(this.updateGetCardsFetchState())
                 const client = new FetchClient()
                 const result = await client.fetchCards()
                 dispatch<GetCards>({

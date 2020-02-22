@@ -4,4 +4,10 @@
         grid-template-columns: 300px 300px 300px;
         grid-gap: 10px;
     }
+
+    .loader {
+        height: 30px;
+        display: flex;
+        justify-content: center;
+    }
 }
