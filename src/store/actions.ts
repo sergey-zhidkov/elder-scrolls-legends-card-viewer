@@ -11,9 +11,11 @@ interface PayloadAction<T> extends Action {
 export const actionTypes = {
     getCards: "esl_getCards",
     updateGetCardsFetchState: "esl_updateGetCardsFetchState",
+    failureGetCardsFetchState: "esl_failureGetCardsFetchState",
 }
 
-export interface GetCards extends PayloadAction<CardListInfoResponse> {}
+export interface GetCardsAction extends PayloadAction<CardListInfoResponse> {}
+export interface SetGetCardsFailureAction extends PayloadAction<string> {}
 
 // export type AppDispatch = typeof store.dispatch
 export type ThunkPromiseAction = ThunkAction<Promise<void>, CardState, undefined, Action>
@@ -27,13 +29,12 @@ export const actions = {
                 dispatch(this.updateGetCardsFetchState())
                 const client = new FetchClient()
                 const result = await client.fetchCards()
-                dispatch<GetCards>({
+                dispatch<GetCardsAction>({
                     type: actionTypes.getCards,
                     payload: result,
                 })
             } catch (err) {
-                // TODO: error handling
-                // dispatch(getIssueFailure(err.toString()))
+                dispatch(this.failureGetCardsFetchState(err.toString()))
             }
         }
     },
@@ -41,6 +42,14 @@ export const actions = {
         return (dispatch: ThunkDispatchApp): void => {
             dispatch({
                 type: actionTypes.updateGetCardsFetchState,
+            })
+        }
+    },
+    failureGetCardsFetchState(error: string): ThunkVoidAction {
+        return (dispatch: ThunkDispatchApp): void => {
+            dispatch<SetGetCardsFailureAction>({
+                type: actionTypes.failureGetCardsFetchState,
+                payload: error,
             })
         }
     },
