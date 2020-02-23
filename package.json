@@ -3,7 +3,7 @@
     "repository": {
         "url": "https://github.com/sergey-zhidkov/elder-scrolls-legends-card-viewer"
     },
-    "homepage": "https://github.com/sergey-zhidkov/elder-scrolls-legends-card-viewer",
+    "homepage": "https://sergey-zhidkov.github.io/elder-scrolls-legends-card-viewer",
     "author": {
         "name": "Sergey Zhidkov"
     },
@@ -20,6 +20,7 @@
         "@types/react-dom": "^16.9.0",
         "@types/react-redux": "^7.1.7",
         "@types/react-router-dom": "^5.1.3",
+        "gh-pages": "^2.2.0",
         "node-sass": "^4.13.1",
         "prettier": "^1.19.1",
         "typescript": "~3.7.2"
@@ -39,6 +40,8 @@
         "redux-thunk": "^2.3.0"
     },
     "scripts": {
+        "predeploy": "yarn run build",
+        "deploy": "gh-pages -d build",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test"
