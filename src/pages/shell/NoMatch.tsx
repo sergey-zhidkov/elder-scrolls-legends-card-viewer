@@ -9,7 +9,7 @@ export function NoMatch({ className }: NoMatchProps): JSX.Element {
     return (
         <div className={`NoMatch ${styles.NoMatch} ${className ?? ""}`}>
             <div className="error">Page not found</div>
-            {/* TOOD: return back */}
+            {/* TOOD: redirect to the root button */}
         </div>
     )
 }
