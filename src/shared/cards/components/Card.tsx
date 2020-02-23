@@ -22,7 +22,9 @@ export const Card: React.FC<CardProps> = ({ className, card }): JSX.Element => {
     return (
         <div className={buildClassName("Card", styles.Card, className)}>
             <div className={buildClassName(styles.name, card.rarity)}>{card.name}</div>
-            <img className={styles.image} src={card.imageUrl} alt={card.name} />
+            <div>
+                <img className={styles.image} src={card.imageUrl} alt={card.name} />
+            </div>
             <div className={styles.description}>
                 {renderProperty("Text", card.text)}
                 {renderProperty("Set", card.set?.name)}
