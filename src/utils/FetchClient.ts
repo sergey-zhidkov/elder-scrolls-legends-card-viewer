@@ -44,7 +44,7 @@ export class FetchClient {
         this.cardsApiUrl = nextUrl || getCardsApiUrl()
     }
 
-    async fetchCards(): Promise<CardListInfoResponse> {
+    fetchCards(): Promise<CardListInfoResponse> {
         return axios
             .get(this.cardsApiUrl, {
                 params: {
@@ -52,11 +52,19 @@ export class FetchClient {
                 },
             })
             .then((response: AxiosResponse<CardListInfoResponse>) => {
-                // console.log(response)
                 return response.data
             })
-        // .catch(function(error) {
-        //     console.log(error)
-        // })
+    }
+
+    searchByName(name: string): Promise<CardListInfoResponse> {
+        return axios
+            .get(this.cardsApiUrl, {
+                params: {
+                    name: name,
+                },
+            })
+            .then((response: AxiosResponse<CardListInfoResponse>) => {
+                return response.data
+            })
     }
 }

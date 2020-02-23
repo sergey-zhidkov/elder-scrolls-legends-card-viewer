@@ -1,5 +1,7 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./Home.module.scss"
+// @ts-ignore
+import SearchInput from "react-search-input"
 import { RouteComponentProps } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { actions } from "../../store/actions"
@@ -14,6 +16,8 @@ interface HomeProps extends RouteComponentProps {
 }
 
 export function Home({ className }: HomeProps): JSX.Element {
+    const [searchQuery, setSearchQuery] = useState("")
+
     const dispatch = useDispatch()
 
     const cards = useSelector((state: RootState) => state.cardState.cards)
@@ -33,13 +37,30 @@ export function Home({ className }: HomeProps): JSX.Element {
             return
         }
         if (fetchState !== FetchState.Loading) {
-            dispatch(actions.getCards())
+            // dispatch(actions.getCards())
+        }
+    }
+
+    const handleSearch = (): void => {
+        if (searchQuery.trim()) {
+            dispatch(actions.searchCardsByName(searchQuery.trim()))
         }
     }
 
     return (
         <div className={buildClassName("Home", styles.Home, className)}>
             <ScrollContainer onScrollBottom={handleScrollBottom}>
+                <div className={styles.searchContainer}>
+                    <SearchInput
+                        className={styles.search}
+                        throttle={200}
+                        onChange={(newValue: string) => setSearchQuery(newValue)}
+                    />
+
+                    <button onClick={handleSearch} disabled={!searchQuery.trim()}>
+                        Search
+                    </button>
+                </div>
                 <CardGrid />
             </ScrollContainer>
         </div>

@@ -37,7 +37,6 @@ export const actions = {
                 dispatch(this.updateGetCardsFetchState())
                 const client = new FetchClient(nextUrl)
                 const result = await client.fetchCards()
-                console.log(result)
                 const cards = result.cards
                 // don't save card list twice
                 result.cards = []
@@ -67,6 +66,36 @@ export const actions = {
                 type: actionTypes.failureGetCardsFetchState,
                 payload: error,
             })
+        }
+    },
+    searchCardsByName(name: string): ThunkPromiseAction {
+        return async (dispatch: Dispatch<any>, getState: () => RootState): Promise<void> => {
+            try {
+                // const cardState = getState().cardState
+                // const nextUrl = cardState.cardListInfo?.cardListInfoResponse?._links?.next
+                // const prevUrl = cardState.cardListInfo?.cardListInfoResponse?._links?.prev
+                // if (prevUrl && !nextUrl) {
+                //     return
+                // }
+
+                dispatch(this.updateGetCardsFetchState())
+                const client = new FetchClient(undefined)
+                const result = await client.searchByName(name)
+                console.log(result, "<< Search")
+                // const cards = result.cards
+                // don't save card list twice
+                // result.cards = []
+                // dispatch<AddCardsAction>({
+                //     type: actionTypes.addCards,
+                //     payload: cards,
+                // })
+                // dispatch<GetCardsAction>({
+                //     type: actionTypes.getCards,
+                //     payload: result,
+                // })
+            } catch (err) {
+                dispatch(this.failureGetCardsFetchState(err.toString()))
+            }
         }
     },
 }
