@@ -41,7 +41,8 @@ export function Home({ className }: HomeProps): JSX.Element {
     const handleSearch = (query: string): void => {
         if (query.trim()) {
             setSearchMode(true)
-            dispatch(actions.searchCardsByName(query.trim()))
+            dispatch(actions.resetSearchState())
+            dispatch(actions.getNextCards(query.trim()))
         }
     }
 

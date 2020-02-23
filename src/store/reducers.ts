@@ -4,9 +4,11 @@ import {
     SetGetCardsFailureAction,
     AddCardsAction,
     SetCardsAction,
+    SetCancelTokenAction,
 } from "./actions"
 import { combineReducers } from "redux"
 import { EslSearchResponse, CardInfo } from "../utils/FetchClient"
+import { CancelTokenSource } from "axios"
 
 export enum FetchState {
     Loading,
@@ -20,6 +22,7 @@ export interface CardState {
         fetchState: FetchState
         error: string
     }>
+    cancelToken: Readonly<CancelTokenSource | null>
     cards: Readonly<CardInfo[]>
 }
 
@@ -60,6 +63,14 @@ function cardListInfo(
     return state
 }
 
+function cancelToken(state: CancelTokenSource | null = null, action: SetCancelTokenAction): CancelTokenSource | null {
+    if (action.type === actionTypes.setCancelToken) {
+        return action.payload
+    }
+
+    return state
+}
+
 function cards(state: CardInfo[] = [], action: AddCardsAction | SetCardsAction): CardInfo[] {
     if (action.type === actionTypes.addCards) {
         return [...state, ...action.payload]
@@ -70,4 +81,4 @@ function cards(state: CardInfo[] = [], action: AddCardsAction | SetCardsAction):
     return state
 }
 
-export const cardReducers = combineReducers({ cardListInfo, cards })
+export const cardReducers = combineReducers({ cardListInfo, cancelToken, cards })

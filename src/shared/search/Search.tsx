@@ -24,9 +24,10 @@ export const Search: React.FC<SearchProps> = ({ className, onSeach, onReset }): 
                     }
                     setSearchQuery(newValue)
                 }}
-                onKeyDown={(event: any) => {
+                onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
                     if (event.key === "Enter") {
-                        onSeach && onSeach(searchQuery)
+                        const target = event.target as HTMLInputElement
+                        onSeach && onSeach(target.value)
                     }
                 }}
             />
