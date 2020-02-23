@@ -1,7 +1,7 @@
 import { Action, AnyAction, Dispatch } from "redux"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
-import { CardState } from "./reducers"
 import { FetchClient, CardListInfoResponse, CardInfo } from "../utils/FetchClient"
+import { RootState } from "./store"
 
 interface PayloadAction<T> extends Action {
     type: string
@@ -19,21 +19,27 @@ export interface GetCardsAction extends PayloadAction<CardListInfoResponse> {}
 export interface SetGetCardsFailureAction extends PayloadAction<string> {}
 export interface AddCardsAction extends PayloadAction<CardInfo[]> {}
 
-// export type AppDispatch = typeof store.dispatch
-export type ThunkPromiseAction = ThunkAction<Promise<void>, CardState, undefined, Action>
-export type ThunkVoidAction = ThunkAction<void, CardState, undefined, Action>
+export type ThunkPromiseAction = ThunkAction<Promise<void>, RootState, undefined, Action>
+export type ThunkVoidAction = ThunkAction<void, RootState, undefined, Action>
 export type ThunkDispatchApp = ThunkDispatch<{}, {}, AnyAction>
 
 export const actions = {
     getCards(): ThunkPromiseAction {
-        return async (dispatch: Dispatch<any>, getState: () => CardState): Promise<void> => {
+        return async (dispatch: Dispatch<any>, getState: () => RootState): Promise<void> => {
             try {
-                dispatch(this.updateGetCardsFetchState())
-                const nextLink = getState().cardListInfo?.cardListInfoResponse?._links?.next
+                const cardState = getState().cardState
+                const nextUrl = cardState.cardListInfo?.cardListInfoResponse?._links?.next
+                const prevUrl = cardState.cardListInfo?.cardListInfoResponse?._links?.prev
+                if (prevUrl && !nextUrl) {
+                    return
+                }
 
-                const client = new FetchClient(nextLink)
+                dispatch(this.updateGetCardsFetchState())
+                const client = new FetchClient(nextUrl)
                 const result = await client.fetchCards()
+                console.log(result)
                 const cards = result.cards
+                // don't save card list twice
                 result.cards = []
                 dispatch<AddCardsAction>({
                     type: actionTypes.addCards,

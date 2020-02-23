@@ -1,18 +1,9 @@
 import axios, { AxiosResponse } from "axios"
 import { eslApiEndpoint } from "../appSettings"
 
-// axios
-// .get("/user?ID=12345")
-// .then(function(response) {
-//     console.log(response)
-// })
-// .catch(function(error) {
-//     console.log(error)
-// })
-
 export interface CardListInfoResponse {
     cards: CardInfo[]
-    _links: { next: string }
+    _links: { next?: string; prev?: string }
     _pageSize: number
     _totalCount: number
 }
@@ -44,13 +35,13 @@ function getCardsApiUrl(): string {
 }
 
 /**
- * Helper class to make http requests to API
+ * Helper class to make API http requests
  */
 export class FetchClient {
     private readonly cardsApiUrl: string
 
-    constructor(nextLink: string | undefined) {
-        this.cardsApiUrl = nextLink || getCardsApiUrl()
+    constructor(nextUrl: string | undefined) {
+        this.cardsApiUrl = nextUrl || getCardsApiUrl()
     }
 
     async fetchCards(): Promise<CardListInfoResponse> {

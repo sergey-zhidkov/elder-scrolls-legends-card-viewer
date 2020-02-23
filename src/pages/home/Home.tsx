@@ -17,7 +17,7 @@ export function Home({ className }: HomeProps): JSX.Element {
     const dispatch = useDispatch()
 
     const cards = useSelector((state: RootState) => state.cardState.cards)
-    const { fetchState } = useSelector((state: RootState) => state.cardState.cardListInfo)
+    const { fetchState, cardListInfoResponse } = useSelector((state: RootState) => state.cardState.cardListInfo)
 
     useEffect(() => {
         if (!cards?.length) {
@@ -27,9 +27,12 @@ export function Home({ className }: HomeProps): JSX.Element {
     }, [cards])
 
     const handleScrollBottom = (): void => {
-        console.log("yes")
+        const cardsCount = cards?.length || 0
+        const totalCount = cardListInfoResponse?._totalCount
+        if (cardsCount === totalCount) {
+            return
+        }
         if (fetchState !== FetchState.Loading) {
-            console.log("load >>>")
             dispatch(actions.getCards())
         }
     }

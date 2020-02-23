@@ -9,7 +9,7 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ className, card }): JSX.Element => {
-    console.log(card)
+    // console.log(card)
 
     return (
         <div className={buildClassName("Card", styles.Card, className)}>
