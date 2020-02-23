@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, UIEventHandler } from "react"
 import styles from "./Home.module.scss"
 import { RouteComponentProps } from "react-router-dom"
 import { useDispatch } from "react-redux"
@@ -12,31 +12,19 @@ interface HomeProps extends RouteComponentProps {
 }
 
 export function Home({ className }: HomeProps): JSX.Element {
-    const [timerId, setTimerId] = useState<number>()
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(actions.getCards())
     }, [])
 
-    const handleScroll = (event: React.UIEvent<HTMLDivElement>): void => {
-        // setTimerId(timerId => {
-        //     if (timerId) {
-        //         console.log(timerId, " << NO")
-        //         return timerId
-        //     } else {
-        //         return requestAnimationFrame(() => {
-        //             console.log(timerId)
-        //         })
-        //     }
-        // })
-        const element = event.target as HTMLDivElement
-        console.log(element, element.scrollHeight, element.scrollTop, element.clientHeight)
+    const handleScrollBottom = (): void => {
+        console.log("yes")
     }
 
     return (
         <div className={buildClassName("Home", styles.Home, className)}>
-            <ScrollContainer onScroll={handleScroll}>
+            <ScrollContainer onScrollBottom={handleScrollBottom}>
                 <CardGrid />
             </ScrollContainer>
         </div>
