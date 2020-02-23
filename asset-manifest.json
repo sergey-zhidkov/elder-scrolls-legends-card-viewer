@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/elder-scrolls-legends-card-viewer/static/css/main.91410bd4.chunk.css",
-    "main.js": "/elder-scrolls-legends-card-viewer/static/js/main.512d6489.chunk.js",
-    "main.js.map": "/elder-scrolls-legends-card-viewer/static/js/main.512d6489.chunk.js.map",
+    "main.css": "/elder-scrolls-legends-card-viewer/static/css/main.dee130d1.chunk.css",
+    "main.js": "/elder-scrolls-legends-card-viewer/static/js/main.e37de8b8.chunk.js",
+    "main.js.map": "/elder-scrolls-legends-card-viewer/static/js/main.e37de8b8.chunk.js.map",
     "runtime-main.js": "/elder-scrolls-legends-card-viewer/static/js/runtime-main.042b3003.js",
     "runtime-main.js.map": "/elder-scrolls-legends-card-viewer/static/js/runtime-main.042b3003.js.map",
-    "static/js/2.2e765b26.chunk.js": "/elder-scrolls-legends-card-viewer/static/js/2.2e765b26.chunk.js",
-    "static/js/2.2e765b26.chunk.js.map": "/elder-scrolls-legends-card-viewer/static/js/2.2e765b26.chunk.js.map",
+    "static/js/2.1e96d822.chunk.js": "/elder-scrolls-legends-card-viewer/static/js/2.1e96d822.chunk.js",
+    "static/js/2.1e96d822.chunk.js.map": "/elder-scrolls-legends-card-viewer/static/js/2.1e96d822.chunk.js.map",
     "index.html": "/elder-scrolls-legends-card-viewer/index.html",
-    "precache-manifest.8d2af58fcbbb269fcc3efd5d822e0e8c.js": "/elder-scrolls-legends-card-viewer/precache-manifest.8d2af58fcbbb269fcc3efd5d822e0e8c.js",
+    "precache-manifest.c1b63b35ccd0bc4caa10d30b64b70216.js": "/elder-scrolls-legends-card-viewer/precache-manifest.c1b63b35ccd0bc4caa10d30b64b70216.js",
     "service-worker.js": "/elder-scrolls-legends-card-viewer/service-worker.js",
-    "static/css/main.91410bd4.chunk.css.map": "/elder-scrolls-legends-card-viewer/static/css/main.91410bd4.chunk.css.map",
-    "static/js/2.2e765b26.chunk.js.LICENSE.txt": "/elder-scrolls-legends-card-viewer/static/js/2.2e765b26.chunk.js.LICENSE.txt"
+    "static/css/main.dee130d1.chunk.css.map": "/elder-scrolls-legends-card-viewer/static/css/main.dee130d1.chunk.css.map",
+    "static/js/2.1e96d822.chunk.js.LICENSE.txt": "/elder-scrolls-legends-card-viewer/static/js/2.1e96d822.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.042b3003.js",
-    "static/js/2.2e765b26.chunk.js",
-    "static/css/main.91410bd4.chunk.css",
-    "static/js/main.512d6489.chunk.js"
+    "static/js/2.1e96d822.chunk.js",
+    "static/css/main.dee130d1.chunk.css",
+    "static/js/main.e37de8b8.chunk.js"
   ]
 }
