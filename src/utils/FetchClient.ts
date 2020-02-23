@@ -61,6 +61,7 @@ export class FetchClient {
             .get(this.cardsApiUrl, {
                 params: {
                     name: name,
+                    pageSize: defaultPageSize,
                 },
             })
             .then((response: AxiosResponse<CardListInfoResponse>) => {

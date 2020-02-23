@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import styles from "./Home.module.scss"
-// @ts-ignore
-import SearchInput from "react-search-input"
 import { RouteComponentProps } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { actions } from "../../store/actions"
@@ -10,14 +8,13 @@ import { CardGrid } from "../../shared/cards/CardGrid"
 import { ScrollContainer } from "../../shared/scrollContainer/ScrollContainer"
 import { RootState } from "../../store/store"
 import { FetchState } from "../../store/reducers"
+import { Search } from "../../shared/search/Search"
 
 interface HomeProps extends RouteComponentProps {
     className?: string
 }
 
 export function Home({ className }: HomeProps): JSX.Element {
-    const [searchQuery, setSearchQuery] = useState("")
-
     const dispatch = useDispatch()
 
     const cards = useSelector((state: RootState) => state.cardState.cards)
@@ -41,26 +38,31 @@ export function Home({ className }: HomeProps): JSX.Element {
         }
     }
 
-    const handleSearch = (): void => {
-        if (searchQuery.trim()) {
-            dispatch(actions.searchCardsByName(searchQuery.trim()))
+    const handleSearch = (query: string): void => {
+        if (query.trim()) {
+            dispatch(actions.searchCardsByName(query.trim()))
         }
     }
 
     return (
         <div className={buildClassName("Home", styles.Home, className)}>
             <ScrollContainer onScrollBottom={handleScrollBottom}>
-                <div className={styles.searchContainer}>
+                <Search onSeach={handleSearch} />
+                {/* <div className={styles.searchContainer}>
                     <SearchInput
                         className={styles.search}
-                        throttle={200}
+                        placeholder="Search by name"
                         onChange={(newValue: string) => setSearchQuery(newValue)}
+                        onKeyDown={(event: any) => {
+                            if (event.key === "Enter") {
+                                handleSearch()
+                            }
+                        }}
                     />
-
                     <button onClick={handleSearch} disabled={!searchQuery.trim()}>
                         Search
                     </button>
-                </div>
+                </div> */}
                 <CardGrid />
             </ScrollContainer>
         </div>
