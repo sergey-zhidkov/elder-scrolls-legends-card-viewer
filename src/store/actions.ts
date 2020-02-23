@@ -26,10 +26,12 @@ export type ThunkDispatchApp = ThunkDispatch<{}, {}, AnyAction>
 
 export const actions = {
     getCards(): ThunkPromiseAction {
-        return async (dispatch: Dispatch<any>): Promise<void> => {
+        return async (dispatch: Dispatch<any>, getState: () => CardState): Promise<void> => {
             try {
                 dispatch(this.updateGetCardsFetchState())
-                const client = new FetchClient()
+                const nextLink = getState().cardListInfo?.cardListInfoResponse?._links?.next
+
+                const client = new FetchClient(nextLink)
                 const result = await client.fetchCards()
                 const cards = result.cards
                 result.cards = []

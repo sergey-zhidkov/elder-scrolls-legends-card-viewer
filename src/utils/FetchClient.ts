@@ -49,8 +49,8 @@ function getCardsApiUrl(): string {
 export class FetchClient {
     private readonly cardsApiUrl: string
 
-    constructor() {
-        this.cardsApiUrl = getCardsApiUrl()
+    constructor(nextLink: string | undefined) {
+        this.cardsApiUrl = nextLink || getCardsApiUrl()
     }
 
     async fetchCards(): Promise<CardListInfoResponse> {
