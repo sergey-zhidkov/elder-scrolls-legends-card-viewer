@@ -17,20 +17,32 @@ export const CardGrid: React.FC<CardGridProps> = ({ className }): JSX.Element =>
     const { fetchState, error } = useSelector((state: RootState) => state.cardState.cardListInfo)
     const cards = useSelector((state: RootState) => state.cardState.cards)
 
-    const renderCardList = (cardList: CardInfo[]): JSX.Element => {
-        return <div className={`${styles.cardList} card-list`}> {(cardList || []).map(renderCard)}</div>
+    const renderCardList = (cardList: CardInfo[]): JSX.Element => (
+        <div className={buildClassName(styles.cardList, "card-list")}>{(cardList || []).map(renderSingleCard)}</div>
+    )
+
+    const renderSingleCard = (card: CardInfo): JSX.Element => <Card key={card.id} card={card} />
+
+    const renderNoResult = (): JSX.Element | null => {
+        if (cards?.length === 0 && fetchState === FetchState.Success) {
+            return <div className={styles.noResults}>No results</div>
+        }
+        return null
     }
 
-    const renderCard = (card: CardInfo): JSX.Element => <Card key={card.id} card={card} />
+    const renderError = (): JSX.Element | null => {
+        if (fetchState === FetchState.Error) {
+            return <div className={styles.error}>{error}</div>
+        }
+        return null
+    }
 
     return (
         <div className={buildClassName("CardGrid", styles.CardGrid, className)}>
             {renderCardList(cards)}
+            {renderNoResult()}
+            {renderError()}
             <Loader loading={fetchState === FetchState.Loading} />
-            {cards.length === 0 && fetchState !== FetchState.Loading && fetchState !== FetchState.Error && (
-                <div className={styles.noResults}>No results</div>
-            )}
-            {fetchState === FetchState.Error && <div className={styles.error}>{error}</div>}
         </div>
     )
 }
