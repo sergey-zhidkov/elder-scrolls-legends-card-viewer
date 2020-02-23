@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./Home.module.scss"
 import { RouteComponentProps } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
@@ -15,6 +15,7 @@ interface HomeProps extends RouteComponentProps {
 }
 
 export function Home({ className }: HomeProps): JSX.Element {
+    const [searchMode, setSearchMode] = useState(false)
     const dispatch = useDispatch()
 
     const cards = useSelector((state: RootState) => state.cardState.cards)
@@ -40,8 +41,14 @@ export function Home({ className }: HomeProps): JSX.Element {
 
     const handleSearch = (query: string): void => {
         if (query.trim()) {
+            setSearchMode(true)
             dispatch(actions.searchCardsByName(query.trim()))
-        } else {
+        }
+    }
+
+    const handleSearchReset = (): void => {
+        if (searchMode) {
+            setSearchMode(false)
             dispatch(actions.resetSearchState())
             dispatch(actions.getCards())
         }
@@ -50,7 +57,7 @@ export function Home({ className }: HomeProps): JSX.Element {
     return (
         <div className={buildClassName("Home", styles.Home, className)}>
             <ScrollContainer onScrollBottom={handleScrollBottom}>
-                <Search onSeach={handleSearch} />
+                <Search onSeach={handleSearch} onReset={handleSearchReset} />
                 <CardGrid />
             </ScrollContainer>
         </div>

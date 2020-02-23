@@ -27,7 +27,9 @@ export const CardGrid: React.FC<CardGridProps> = ({ className }): JSX.Element =>
         <div className={buildClassName("CardGrid", styles.CardGrid, className)}>
             {renderCardList(cards)}
             <Loader loading={fetchState === FetchState.Loading} />
-            {cards.length === 0 && <div className={styles.noResults}>No results</div>}
+            {cards.length === 0 && fetchState !== FetchState.Loading && (
+                <div className={styles.noResults}>No results</div>
+            )}
             {fetchState === FetchState.Error && <div className={styles.error}>Error</div>}
         </div>
     )

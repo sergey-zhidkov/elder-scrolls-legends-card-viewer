@@ -7,9 +7,10 @@ import SearchInput from "react-search-input"
 interface SearchProps {
     className?: string
     onSeach?: (query: string) => void
+    onReset?: () => void
 }
 
-export const Search: React.FC<SearchProps> = ({ className, onSeach }): JSX.Element => {
+export const Search: React.FC<SearchProps> = ({ className, onSeach, onReset }): JSX.Element => {
     const [searchQuery, setSearchQuery] = useState("")
 
     return (
@@ -18,8 +19,8 @@ export const Search: React.FC<SearchProps> = ({ className, onSeach }): JSX.Eleme
                 className={styles.search}
                 placeholder="Search by name"
                 onChange={(newValue: string) => {
-                    if (!newValue && onSeach) {
-                        onSeach(newValue)
+                    if (!newValue && onReset) {
+                        onReset()
                     }
                     setSearchQuery(newValue)
                 }}
