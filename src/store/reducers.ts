@@ -1,6 +1,6 @@
-import { actionTypes, GetCardsAction, SetGetCardsFailureAction } from "./actions"
+import { actionTypes, GetCardsAction, SetGetCardsFailureAction, AddCardsAction } from "./actions"
 import { combineReducers } from "redux"
-import { CardListInfoResponse } from "../utils/FetchClient"
+import { CardListInfoResponse, CardInfo } from "../utils/FetchClient"
 
 export enum FetchState {
     Loading,
@@ -14,6 +14,7 @@ export interface CardState {
         fetchState: FetchState
         error: string
     }>
+    cards: CardInfo
 }
 
 function cardListInfo(
@@ -47,4 +48,12 @@ function cardListInfo(
     return state
 }
 
-export const cardReducers = combineReducers({ cardListInfo })
+function cards(state: CardInfo[] = [], action: AddCardsAction): CardInfo[] {
+    if (action.type === actionTypes.addCards) {
+        return [...state, ...action.payload]
+    }
+
+    return state
+}
+
+export const cardReducers = combineReducers({ cardListInfo, cards })
