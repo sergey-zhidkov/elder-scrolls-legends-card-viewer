@@ -18,31 +18,32 @@ export function Home({ className }: HomeProps): JSX.Element {
     const dispatch = useDispatch()
 
     const cards = useSelector((state: RootState) => state.cardState.cards)
-    const { fetchState, searchResponse: cardListInfoResponse } = useSelector(
-        (state: RootState) => state.cardState.cardListInfo
-    )
+    const { fetchState, searchResponse } = useSelector((state: RootState) => state.cardState.cardListInfo)
 
     useEffect(() => {
         if (!cards?.length) {
             dispatch(actions.getCards())
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cards])
+    }, [])
 
     const handleScrollBottom = (): void => {
         const cardsCount = cards?.length || 0
-        const totalCount = cardListInfoResponse?._totalCount
+        const totalCount = searchResponse?._totalCount
         if (cardsCount === totalCount) {
             return
         }
         if (fetchState !== FetchState.Loading) {
-            // dispatch(actions.getCards())
+            dispatch(actions.getCards())
         }
     }
 
     const handleSearch = (query: string): void => {
         if (query.trim()) {
             dispatch(actions.searchCardsByName(query.trim()))
+        } else {
+            dispatch(actions.resetSearchState())
+            dispatch(actions.getCards())
         }
     }
 

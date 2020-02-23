@@ -7,10 +7,6 @@ export const rootReducer = combineReducers({
     cardState: cardReducers,
 })
 
-// export interface RootState {
-//     readonly cardState: CardState
-// }
-
 export type RootState = ReturnType<typeof rootReducer>
 
 const logger = createLogger({

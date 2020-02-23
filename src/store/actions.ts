@@ -14,6 +14,7 @@ export const actionTypes = {
     failureGetCardsFetchState: "esl_failureGetCardsFetchState",
     addCards: "esl_addCards",
     setCards: "esl_setCards",
+    resetSearchState: "esl_resetSearchState",
 }
 
 export interface GetSearchResponseAction extends PayloadAction<EslSearchResponse> {}
@@ -31,8 +32,8 @@ export const actions = {
             try {
                 const cardState = getState().cardState
                 const cardsCount = cardState.cards?.length || 0
-                const totalCount = cardState.cardListInfo.searchResponse?._totalCount ?? 0
-                if (cardsCount >= totalCount) {
+                const totalCount = cardState.cardListInfo.searchResponse?._totalCount
+                if (totalCount !== undefined && cardsCount >= totalCount) {
                     return
                 }
 
@@ -57,21 +58,20 @@ export const actions = {
         }
     },
     searchCardsByName(name: string): ThunkPromiseAction {
-        return async (dispatch: Dispatch<any>, getState: () => RootState): Promise<void> => {
+        return async (dispatch: Dispatch<any>): Promise<void> => {
             try {
-                // clean
                 dispatch<SetCardsAction>({
-                    type: actionTypes.addCards,
+                    type: actionTypes.setCards,
                     payload: [],
                 })
                 dispatch(this.updateGetCardsFetchState())
                 const client = new FetchClient()
                 const result = await client.searchByName(name)
-                console.log(result, "<< Search")
                 const cards = result.cards
                 result.cards = []
+                console.log(result, "<< Search", cards)
                 dispatch<SetCardsAction>({
-                    type: actionTypes.addCards,
+                    type: actionTypes.setCards,
                     payload: cards,
                 })
                 dispatch<GetSearchResponseAction>({
@@ -81,6 +81,17 @@ export const actions = {
             } catch (err) {
                 dispatch(this.failureGetCardsFetchState(err.toString()))
             }
+        }
+    },
+    resetSearchState(): ThunkVoidAction {
+        return (dispatch: Dispatch): void => {
+            dispatch({
+                type: actionTypes.resetSearchState,
+            })
+            dispatch<SetCardsAction>({
+                type: actionTypes.setCards,
+                payload: [],
+            })
         }
     },
     updateGetCardsFetchState(): ThunkVoidAction {

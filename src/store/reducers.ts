@@ -21,11 +21,6 @@ export interface CardState {
         error: string
     }>
     cards: Readonly<CardInfo[]>
-    // searchCardsInfo: Readonly<{
-    //     searchResponse: CardListInfoResponse | null
-    //     fetchState: FetchState
-    //     error: string
-    // }>
 }
 
 function cardListInfo(
@@ -54,6 +49,12 @@ function cardListInfo(
             fetchState: FetchState.Error,
             error: action.payload as string,
         }
+    } else if (action.type === actionTypes.resetSearchState) {
+        return {
+            searchResponse: null,
+            fetchState: FetchState.Success,
+            error: "",
+        }
     }
 
     return state
@@ -68,36 +69,5 @@ function cards(state: CardInfo[] = [], action: AddCardsAction | SetCardsAction):
 
     return state
 }
-
-// function searchCardsInfo(
-//     state: CardState["searchCardsInfo"] = {
-//         searchResponse: null,
-//         fetchState: FetchState.Success,
-//         error: "",
-//     },
-//     action: GetCardsAction | SetGetCardsFailureAction
-// ): CardState["searchCardsInfo"] {
-//     if (action.type === actionTypes.getCards) {
-//         return {
-//             searchResponse: action.payload as CardListInfoResponse,
-//             fetchState: FetchState.Success,
-//             error: state.error,
-//         }
-//     } else if (action.type === actionTypes.updateGetCardsFetchState) {
-//         return {
-//             searchResponse: state.cardListInfoResponse,
-//             fetchState: FetchState.Loading,
-//             error: state.error,
-//         }
-//     } else if (action.type === actionTypes.failureGetCardsFetchState) {
-//         return {
-//             searchResponse: state.cardListInfoResponse,
-//             fetchState: FetchState.Error,
-//             error: action.payload as string,
-//         }
-//     }
-
-//     return state
-// }
 
 export const cardReducers = combineReducers({ cardListInfo, cards })

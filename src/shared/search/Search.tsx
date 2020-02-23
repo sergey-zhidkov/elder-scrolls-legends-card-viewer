@@ -17,7 +17,12 @@ export const Search: React.FC<SearchProps> = ({ className, onSeach }): JSX.Eleme
             <SearchInput
                 className={styles.search}
                 placeholder="Search by name"
-                onChange={(newValue: string) => setSearchQuery(newValue)}
+                onChange={(newValue: string) => {
+                    if (!newValue && onSeach) {
+                        onSeach(newValue)
+                    }
+                    setSearchQuery(newValue)
+                }}
                 onKeyDown={(event: any) => {
                     if (event.key === "Enter") {
                         onSeach && onSeach(searchQuery)

@@ -4,4 +4,17 @@
         grid-template-columns: 300px 300px 300px;
         grid-gap: 10px;
     }
+
+    .noResults {
+        font-size: 24px;
+        text-align: center;
+        height: 50px;
+    }
+
+    .error {
+        color: red;
+        font-size: 24px;
+        text-align: center;
+        height: 50px;
+    }
 }
