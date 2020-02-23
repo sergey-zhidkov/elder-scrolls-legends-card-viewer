@@ -53,6 +53,8 @@ export const actions = {
                     payload: result,
                 })
             } catch (err) {
+                console.log(err)
+
                 dispatch(this.failureGetCardsFetchState(err.toString()))
             }
         }

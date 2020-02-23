@@ -14,7 +14,7 @@ interface CardGridProps {
 }
 
 export const CardGrid: React.FC<CardGridProps> = ({ className }): JSX.Element => {
-    const { fetchState } = useSelector((state: RootState) => state.cardState.cardListInfo)
+    const { fetchState, error } = useSelector((state: RootState) => state.cardState.cardListInfo)
     const cards = useSelector((state: RootState) => state.cardState.cards)
 
     const renderCardList = (cardList: CardInfo[]): JSX.Element => {
@@ -27,10 +27,10 @@ export const CardGrid: React.FC<CardGridProps> = ({ className }): JSX.Element =>
         <div className={buildClassName("CardGrid", styles.CardGrid, className)}>
             {renderCardList(cards)}
             <Loader loading={fetchState === FetchState.Loading} />
-            {cards.length === 0 && fetchState !== FetchState.Loading && (
+            {cards.length === 0 && fetchState !== FetchState.Loading && fetchState !== FetchState.Error && (
                 <div className={styles.noResults}>No results</div>
             )}
-            {fetchState === FetchState.Error && <div className={styles.error}>Error</div>}
+            {fetchState === FetchState.Error && <div className={styles.error}>{error}</div>}
         </div>
     )
 }
