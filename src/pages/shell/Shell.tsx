@@ -3,6 +3,7 @@ import styles from "./Shell.module.scss"
 import { Switch, Route } from "react-router-dom"
 import { NoMatch } from "./NoMatch"
 import { Home } from "../home/Home"
+import { buildClassName } from "../../utils/utils"
 
 interface ShellProps {
     className?: string
@@ -18,5 +19,5 @@ export function Shell({ className }: ShellProps): JSX.Element {
         )
     }
 
-    return <div className={`Shell ${styles.Shell} ${className ?? ""}`}>{renderRouters()}</div>
+    return <div className={buildClassName("Shell", styles.Shell, className)}>{renderRouters()}</div>
 }

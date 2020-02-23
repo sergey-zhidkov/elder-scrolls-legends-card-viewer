@@ -22,7 +22,6 @@ export const ScrollContainer: React.FC<ScrollContainerProps> = ({
     }
 
     const handleScrollBottom = (event: React.UIEvent<HTMLDivElement>): void => {
-        // TODO: debounce with requestAnimationFrame
         if (!onScrollBottom) return
         const element = event.target as HTMLDivElement
         if (element.scrollTop + element.clientHeight + margin >= element.scrollHeight) {

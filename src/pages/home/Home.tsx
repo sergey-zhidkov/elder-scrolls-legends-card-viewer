@@ -16,10 +16,11 @@ interface HomeProps extends RouteComponentProps {
 
 export function Home({ className }: HomeProps): JSX.Element {
     const [searchMode, setSearchMode] = useState(false)
-    const dispatch = useDispatch()
 
     const cards = useSelector((state: RootState) => state.cardState.cards)
     const { fetchState, searchResponse } = useSelector((state: RootState) => state.cardState.cardListInfo)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (!cards?.length) {
