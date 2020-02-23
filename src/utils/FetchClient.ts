@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios"
 import { eslApiEndpoint } from "../appSettings"
 
-export interface CardListInfoResponse {
+export interface EslSearchResponse {
     cards: CardInfo[]
     _links: { next?: string; prev?: string }
     _pageSize: number
@@ -40,23 +40,23 @@ function getCardsApiUrl(): string {
 export class FetchClient {
     private readonly cardsApiUrl: string
 
-    constructor(nextUrl: string | undefined) {
+    constructor(nextUrl?: string) {
         this.cardsApiUrl = nextUrl || getCardsApiUrl()
     }
 
-    fetchCards(): Promise<CardListInfoResponse> {
+    fetchCards(): Promise<EslSearchResponse> {
         return axios
             .get(this.cardsApiUrl, {
                 params: {
                     pageSize: defaultPageSize,
                 },
             })
-            .then((response: AxiosResponse<CardListInfoResponse>) => {
+            .then((response: AxiosResponse<EslSearchResponse>) => {
                 return response.data
             })
     }
 
-    searchByName(name: string): Promise<CardListInfoResponse> {
+    searchByName(name: string): Promise<EslSearchResponse> {
         return axios
             .get(this.cardsApiUrl, {
                 params: {
@@ -64,7 +64,7 @@ export class FetchClient {
                     pageSize: defaultPageSize,
                 },
             })
-            .then((response: AxiosResponse<CardListInfoResponse>) => {
+            .then((response: AxiosResponse<EslSearchResponse>) => {
                 return response.data
             })
     }

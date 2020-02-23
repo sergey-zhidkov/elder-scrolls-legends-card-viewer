@@ -18,7 +18,9 @@ export function Home({ className }: HomeProps): JSX.Element {
     const dispatch = useDispatch()
 
     const cards = useSelector((state: RootState) => state.cardState.cards)
-    const { fetchState, cardListInfoResponse } = useSelector((state: RootState) => state.cardState.cardListInfo)
+    const { fetchState, searchResponse: cardListInfoResponse } = useSelector(
+        (state: RootState) => state.cardState.cardListInfo
+    )
 
     useEffect(() => {
         if (!cards?.length) {
@@ -48,21 +50,6 @@ export function Home({ className }: HomeProps): JSX.Element {
         <div className={buildClassName("Home", styles.Home, className)}>
             <ScrollContainer onScrollBottom={handleScrollBottom}>
                 <Search onSeach={handleSearch} />
-                {/* <div className={styles.searchContainer}>
-                    <SearchInput
-                        className={styles.search}
-                        placeholder="Search by name"
-                        onChange={(newValue: string) => setSearchQuery(newValue)}
-                        onKeyDown={(event: any) => {
-                            if (event.key === "Enter") {
-                                handleSearch()
-                            }
-                        }}
-                    />
-                    <button onClick={handleSearch} disabled={!searchQuery.trim()}>
-                        Search
-                    </button>
-                </div> */}
                 <CardGrid />
             </ScrollContainer>
         </div>
