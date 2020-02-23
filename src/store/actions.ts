@@ -24,7 +24,6 @@ export interface SetCardsAction extends PayloadAction<CardInfo[]> {}
 
 export type ThunkPromiseAction = ThunkAction<Promise<void>, RootState, undefined, Action>
 export type ThunkVoidAction = ThunkAction<void, RootState, undefined, Action>
-// export type ThunkDispatchApp = ThunkDispatch<{}, {}, AnyAction>
 
 export const actions = {
     getCards(): ThunkPromiseAction {
@@ -53,8 +52,7 @@ export const actions = {
                     payload: result,
                 })
             } catch (err) {
-                console.log(err)
-
+                console.debug(err)
                 dispatch(this.failureGetCardsFetchState(err.toString()))
             }
         }
