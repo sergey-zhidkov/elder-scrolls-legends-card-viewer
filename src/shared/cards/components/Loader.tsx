@@ -11,7 +11,7 @@ interface LoaderProps {
 export const Loader: React.FC<LoaderProps> = ({ className, loading }): JSX.Element => {
     return (
         <div className={buildClassName("Loader", styles.Loader, className)}>
-            <PropagateLoader size={30} loading={loading} color="#0078d4" />
+            <PropagateLoader size={40} loading={loading} color="#0078d4" />
         </div>
     )
 }

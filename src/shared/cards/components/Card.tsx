@@ -9,19 +9,26 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ className, card }): JSX.Element => {
-    // console.log(card)
+    const renderProperty = (label: string, property?: string): JSX.Element | null => {
+        if (!property) return null
+        return (
+            <div className={styles.property}>
+                <span className={styles.title}>{label}</span>
+                <span>{property}</span>
+            </div>
+        )
+    }
 
     return (
         <div className={buildClassName("Card", styles.Card, className)}>
+            <div className={buildClassName(styles.name, card.rarity)}>{card.name}</div>
             <div>
-                {/* TODO: alt text */}
-                <img className={styles.image} src={card.imageUrl} alt="TODO" />
+                <img className={styles.image} src={card.imageUrl} alt={card.name} />
             </div>
-            <div>
-                <div>Name: {card.name}</div>
-                <div>Text: {card.text}</div>
-                <div>Set: {card.set?.name}</div>
-                <div>Type: {card.type}</div>
+            <div className={styles.description}>
+                {renderProperty("Text", card.text)}
+                {renderProperty("Set", card.set?.name)}
+                {renderProperty("Type", card.type)}
             </div>
         </div>
     )
