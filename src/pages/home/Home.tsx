@@ -24,20 +24,18 @@ export function Home({ className }: HomeProps): JSX.Element {
 
     useEffect(() => {
         if (!cards?.length) {
-            dispatch(actions.getCards())
+            dispatch(actions.getNextCards())
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const handleScrollBottom = (): void => {
+    const handleScrollToBottom = (): void => {
         const cardsCount = cards?.length || 0
         const totalCount = searchResponse?._totalCount
-        if (cardsCount === totalCount) {
+        if (cardsCount === totalCount || fetchState === FetchState.Loading) {
             return
         }
-        if (fetchState !== FetchState.Loading) {
-            dispatch(actions.getCards())
-        }
+        dispatch(actions.getNextCards())
     }
 
     const handleSearch = (query: string): void => {
@@ -51,13 +49,13 @@ export function Home({ className }: HomeProps): JSX.Element {
         if (searchMode) {
             setSearchMode(false)
             dispatch(actions.resetSearchState())
-            dispatch(actions.getCards())
+            dispatch(actions.getNextCards())
         }
     }
 
     return (
         <div className={buildClassName("Home", styles.Home, className)}>
-            <ScrollContainer onScrollBottom={handleScrollBottom}>
+            <ScrollContainer onScrollToBottom={handleScrollToBottom}>
                 <Search onSeach={handleSearch} onReset={handleSearchReset} />
                 <CardGrid />
             </ScrollContainer>

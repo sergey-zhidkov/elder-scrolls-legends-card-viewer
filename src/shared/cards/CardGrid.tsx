@@ -18,7 +18,7 @@ export const CardGrid: React.FC<CardGridProps> = ({ className }): JSX.Element =>
     const cards = useSelector((state: RootState) => state.cardState.cards)
 
     const renderCardList = (cardList: CardInfo[]): JSX.Element => (
-        <div className={buildClassName(styles.cardList, "card-list")}>{(cardList || []).map(renderSingleCard)}</div>
+        <div className={styles.cardList}>{(cardList || []).map(renderSingleCard)}</div>
     )
 
     const renderSingleCard = (card: CardInfo): JSX.Element => <Card key={card.id} card={card} />

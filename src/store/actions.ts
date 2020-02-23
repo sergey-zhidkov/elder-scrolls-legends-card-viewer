@@ -26,7 +26,7 @@ export type ThunkPromiseAction = ThunkAction<Promise<void>, RootState, undefined
 export type ThunkVoidAction = ThunkAction<void, RootState, undefined, Action>
 
 export const actions = {
-    getCards(): ThunkPromiseAction {
+    getNextCards(): ThunkPromiseAction {
         return async (dispatch: Dispatch<any>, getState: () => RootState): Promise<void> => {
             try {
                 const cardState = getState().cardState
@@ -69,7 +69,6 @@ export const actions = {
                 const result = await client.searchByName(name)
                 const cards = result.cards
                 result.cards = []
-                console.log(result, "<< Search", cards)
                 dispatch<SetCardsAction>({
                     type: actionTypes.setCards,
                     payload: cards,

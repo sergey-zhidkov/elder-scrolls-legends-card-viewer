@@ -5,7 +5,7 @@ import { buildClassName } from "../../utils/utils"
 interface ScrollContainerProps {
     className?: string
     onScroll?: UIEventHandler
-    onScrollBottom?: () => void
+    onScrollToBottom?: () => void
 }
 
 const margin = 5
@@ -14,7 +14,7 @@ export const ScrollContainer: React.FC<ScrollContainerProps> = ({
     className,
     children,
     onScroll,
-    onScrollBottom,
+    onScrollToBottom,
 }): JSX.Element => {
     const handleSroll: UIEventHandler<HTMLDivElement> = event => {
         onScroll && onScroll(event)
@@ -22,10 +22,10 @@ export const ScrollContainer: React.FC<ScrollContainerProps> = ({
     }
 
     const handleScrollBottom = (event: React.UIEvent<HTMLDivElement>): void => {
-        if (!onScrollBottom) return
+        if (!onScrollToBottom) return
         const element = event.target as HTMLDivElement
         if (element.scrollTop + element.clientHeight + margin >= element.scrollHeight) {
-            onScrollBottom()
+            onScrollToBottom()
         }
     }
 
