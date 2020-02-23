@@ -2,6 +2,8 @@
 
 Card viewer for https://docs.elderscrollslegends.io/ API endpoint.
 
+### [Demo](https://sergey-zhidkov.github.io/elder-scrolls-legends-card-viewer/)
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -25,6 +27,7 @@ or
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br />
+Just couple tests for example.
 
 ### `yarn build`
 
