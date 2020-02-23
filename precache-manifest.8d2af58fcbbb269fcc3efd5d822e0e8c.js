@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8af4217f34cbafeedaca58925fd4e5ec",
+    "revision": "0d4e3e2b94a30b4224c40099ec0021a0",
     "url": "/elder-scrolls-legends-card-viewer/index.html"
   },
   {
