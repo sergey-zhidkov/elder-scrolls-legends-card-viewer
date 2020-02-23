@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/elder-scrolls-legends-card-viewer/static/css/main.82c734e0.chunk.css",
-    "main.js": "/elder-scrolls-legends-card-viewer/static/js/main.a67f9a82.chunk.js",
-    "main.js.map": "/elder-scrolls-legends-card-viewer/static/js/main.a67f9a82.chunk.js.map",
+    "main.js": "/elder-scrolls-legends-card-viewer/static/js/main.496343c0.chunk.js",
+    "main.js.map": "/elder-scrolls-legends-card-viewer/static/js/main.496343c0.chunk.js.map",
     "runtime-main.js": "/elder-scrolls-legends-card-viewer/static/js/runtime-main.042b3003.js",
     "runtime-main.js.map": "/elder-scrolls-legends-card-viewer/static/js/runtime-main.042b3003.js.map",
-    "static/js/2.e76046ce.chunk.js": "/elder-scrolls-legends-card-viewer/static/js/2.e76046ce.chunk.js",
-    "static/js/2.e76046ce.chunk.js.map": "/elder-scrolls-legends-card-viewer/static/js/2.e76046ce.chunk.js.map",
+    "static/js/2.2e765b26.chunk.js": "/elder-scrolls-legends-card-viewer/static/js/2.2e765b26.chunk.js",
+    "static/js/2.2e765b26.chunk.js.map": "/elder-scrolls-legends-card-viewer/static/js/2.2e765b26.chunk.js.map",
     "index.html": "/elder-scrolls-legends-card-viewer/index.html",
-    "precache-manifest.e91a82324930da038b750980c3a83c53.js": "/elder-scrolls-legends-card-viewer/precache-manifest.e91a82324930da038b750980c3a83c53.js",
+    "precache-manifest.c55472ca6dbb304706d11fca8c7fb09e.js": "/elder-scrolls-legends-card-viewer/precache-manifest.c55472ca6dbb304706d11fca8c7fb09e.js",
     "service-worker.js": "/elder-scrolls-legends-card-viewer/service-worker.js",
     "static/css/main.82c734e0.chunk.css.map": "/elder-scrolls-legends-card-viewer/static/css/main.82c734e0.chunk.css.map",
-    "static/js/2.e76046ce.chunk.js.LICENSE.txt": "/elder-scrolls-legends-card-viewer/static/js/2.e76046ce.chunk.js.LICENSE.txt"
+    "static/js/2.2e765b26.chunk.js.LICENSE.txt": "/elder-scrolls-legends-card-viewer/static/js/2.2e765b26.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.042b3003.js",
-    "static/js/2.e76046ce.chunk.js",
+    "static/js/2.2e765b26.chunk.js",
     "static/css/main.82c734e0.chunk.css",
-    "static/js/main.a67f9a82.chunk.js"
+    "static/js/main.496343c0.chunk.js"
   ]
 }

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/elder-scrolls-legends-card-viewer/precache-manifest.e91a82324930da038b750980c3a83c53.js"
+  "/elder-scrolls-legends-card-viewer/precache-manifest.c55472ca6dbb304706d11fca8c7fb09e.js"
 );
 
 self.addEventListener('message', (event) => {
