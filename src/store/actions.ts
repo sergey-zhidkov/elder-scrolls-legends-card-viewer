@@ -2,7 +2,6 @@ import { Action, Dispatch } from "redux"
 import { ThunkAction } from "redux-thunk"
 import { FetchClient, EslSearchResponse, CardInfo } from "../utils/FetchClient"
 import { RootState } from "./store"
-import axios, { CancelTokenSource } from "axios"
 import { CardState } from "./reducers"
 
 interface PayloadAction<T> extends Action {
@@ -24,7 +23,6 @@ export interface GetSearchResponseAction extends PayloadAction<EslSearchResponse
 export interface SetGetCardsFailureAction extends PayloadAction<string> {}
 export interface AddCardsAction extends PayloadAction<CardInfo[]> {}
 export interface SetCardsAction extends PayloadAction<CardInfo[]> {}
-export interface SetCancelTokenAction extends PayloadAction<CancelTokenSource | null> {}
 
 export type ThunkPromiseAction = ThunkAction<Promise<void>, RootState, undefined, Action>
 export type ThunkVoidAction = ThunkAction<void, RootState, undefined, Action>
@@ -35,8 +33,13 @@ function hasMoreCards(cardState: CardState): boolean {
     return totalCount === undefined || cardsCount < totalCount
 }
 
+// Unique request id to synchronize http requests
+let requestId = 0
+
 export const actions = {
     getNextCards(namePattern?: string): ThunkPromiseAction {
+        requestId++
+        const curRequestId = requestId
         return async (dispatch: Dispatch<any>, getState: () => RootState): Promise<void> => {
             try {
                 const cardState = getState().cardState
@@ -45,24 +48,16 @@ export const actions = {
                 }
 
                 dispatch(this.updateGetCardsFetchState())
-                // const currentToken = cardState.cancelToken as CancelTokenSource
-                // if (currentToken) {
-                //     currentToken.cancel()
-                // }
                 const nextUrl = cardState.cardListInfo.searchResponse?._links?.next
                 const client = new FetchClient(nextUrl)
-                // dispatch<SetCancelTokenAction>({
-                //     type: actionTypes.setCancelToken,
-                //     payload: client.token,
-                // })
                 const result = await client.fetchCards(namePattern)
+                // Cancel results for stale request
+                if (curRequestId !== requestId) {
+                    return
+                }
                 const cards = result.cards
                 // don't save card list twice
                 result.cards = []
-                // dispatch<SetCancelTokenAction>({
-                //     type: actionTypes.setCancelToken,
-                //     payload: client.token,
-                // })
                 dispatch<AddCardsAction>({
                     type: actionTypes.addCards,
                     payload: cards,
@@ -72,11 +67,7 @@ export const actions = {
                     payload: result,
                 })
             } catch (err) {
-                // if (axios.isCancel(err)) {
-                //     console.debug(err)
-                // } else {
                 dispatch(this.failureGetCardsFetchState(err.toString()))
-                // }
             }
         }
     },
