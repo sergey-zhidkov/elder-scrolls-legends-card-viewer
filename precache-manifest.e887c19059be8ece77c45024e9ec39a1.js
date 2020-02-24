@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f03ff4932e5929921051cd06ee0ab7bb",
+    "revision": "b9f9c94a85111b7ca6ff1496cd3130a8",
     "url": "/elder-scrolls-legends-card-viewer/index.html"
   },
   {
-    "revision": "74988ba2810ce4611243",
+    "revision": "af2fdaa874dac7b54ab5",
     "url": "/elder-scrolls-legends-card-viewer/static/css/main.dee130d1.chunk.css"
   },
   {
-    "revision": "cbde85fd2b11b7ddfa22",
-    "url": "/elder-scrolls-legends-card-viewer/static/js/2.1e96d822.chunk.js"
+    "revision": "2f2eb31bd9e70f914465",
+    "url": "/elder-scrolls-legends-card-viewer/static/js/2.46f80e7d.chunk.js"
   },
   {
     "revision": "24e4538011227ed5892b76be6a7e3cd7",
-    "url": "/elder-scrolls-legends-card-viewer/static/js/2.1e96d822.chunk.js.LICENSE.txt"
+    "url": "/elder-scrolls-legends-card-viewer/static/js/2.46f80e7d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "74988ba2810ce4611243",
-    "url": "/elder-scrolls-legends-card-viewer/static/js/main.e37de8b8.chunk.js"
+    "revision": "af2fdaa874dac7b54ab5",
+    "url": "/elder-scrolls-legends-card-viewer/static/js/main.140a7415.chunk.js"
   },
   {
     "revision": "fdbd8eaaf7c6a46c80ad",
